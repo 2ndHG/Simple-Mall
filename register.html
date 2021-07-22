@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>使用者註冊頁面</title>
+</head>
+
+<body>
+    <h1>註冊</h1>
+    <hr>
+    <form action="sendRegisterData.php" method="post" name="info">
+		<label for="address">EMail Address:</label>
+        <br>
+        <input type="email" name="address" placeholder="@gmail.com" />
+        <br>
+		<label for="address">Password:</label>
+        <br>
+		<input type="text" name="password" placeholder="輸入密碼" required autofocus/>
+		<br>
+        <label for="name">Name:</label>
+        <br>
+        <input type="text" name="name" placeholder="輸入姓名" required autofocus/>
+        <br>
+        <label for="tel">Tel:</label>
+        <br>
+        <input type="tel" name="tel" />
+        <br>
+        <label for="birthday">Birthday:</label>
+        <br>
+        <input type="date" name="birthday" />
+        <br>
+        
+        <input type="submit" name="submit"/>
+        <input type="reset" />
+    </form>
+</body>
+
+</html>

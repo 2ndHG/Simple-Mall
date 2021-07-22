@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	p {text-align: center;}
+	h2 {text-align: center;}
+	.button {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	}
+</style>
+<meta charset="utf-8" />
+<title>upload.html</title>
+</head>
+<body>
+<h2>商家上傳</h2>
+<!--
+		<form method="POST"
+			action="upload.php"
+			enctype="multipart/form-data">
+			<input type="file"
+				name="image"
+				value="" />
+
+			<div>
+				<button type="submit"
+						name="submit">
+				UPLOAD
+				</button>
+			</div>
+		</form>
+	-->
+		
+<div align="center" style="background-color:000000;padding:10px;margin-bottom:5px;">
+	<form action="upload.php" method="post" enctype="multipart/form-data">>
+		<label for="name">商品名稱:</label>
+        <br>
+        <input type="text" name="name" />
+        <br>
+		<label for="intro">商品介紹:</label>
+        <br>
+		<textarea type="text" name="intro" rows="4" cols="50" />
+		</textarea>
+		<br>
+		<label>上傳圖片:</label>
+		<br>
+        <input type="file"
+				name="image"
+				value="" />
+        <br>
+		<label for="price">價格:</label>
+        <br>
+        <input type="number" name="price" />
+        <br>
+		<label for="price">數量:</label>
+        <br>
+        <input type="number" name="amount" />
+        <br>
+        <input type="submit" name="submit"/>
+        <input type="reset" />
+    </form>
+</div>
+<body>
+
+</html>
