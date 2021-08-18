@@ -43,26 +43,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-    <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script>
-	<script language="javascript" type="text/javascript" src="abi.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js">
+	</script>
+	
+    <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js">
+	</script>
+	
+	<script language="javascript" type="text/javascript" src="abi.js">
+	</script>
 
 </head>
 <body>
-	<h2><span class="getStaus"></span></h2> 
+	<button id="btn" class="enableEthereumButton">連接</button>
+	<h2>Account: <span class="showAccount"></span></h2>
+	<input type="button" id="btn" onclick=getMsg() value="取值">
+	<input type="button" id="btn" onclick=setMsg() value="寫入">
+	<input type="button" id="btn" onclick=sendTransaction() value="送錢給紹哥">
+	
+	<h3>欲傳送的資料:</h3>
+	<p id="dataToSend"><?php echo $data?></p>
+	<!--h2><span class="getStaus"></span></h2--> 
 	<form name="form" id="form">
 		請輸入文字:
 		<input type="text" name="data" id="data">
 	</form>
-	<button id="btn" class="enableEthereumButton">連接</button>
-    <h2>Account: <span class="showAccount"></span></h2>
-    <h2>Transaction Hash:  <span class="transactionHash1"></span></h2>
-	<input type="button" id="btn" onclick=getMsg() value="註冊">
-	<input type="button" id="btn" onclick=setMsg() value="寫入">
 	
-	<p id="dataToSend"><?php echo $data?></p>
+    <h2>乙太幣的 Transaction Hash: <span id="ethTransactionHash"></span></h2>
+    <h2>訊息的 Transaction Hash: <span class="transactionHash1"></span></h2>
+	<br>
+	<br>
+	<h2>將hash寫入資料庫<h2/>
 	
-	<p>WEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE</p>
+	<form name="form" id="form" action="saveTransactionHash.php" method="post">
+		<input type="text" id="hashToSave" name="hashToSave" value='000'>
+		<input type="submit" name='saveHash' onclick='' value='將hash寫入資料庫'>
+	</form>
 		
 </body>
 <script type="text/javascript">
@@ -126,16 +141,19 @@
 
           
         //寫入訊息       
-        function setMsg(){
+        function setMsg(moneyHash){
         	const form = document.forms["form"];
         	const dae = form.elements.data.value;
 			var dataToSend = document.getElementById('dataToSend').innerHTML;
+			
+			
         	ContractTeat.methods.setMSG1(dataToSend).send({ from: account },function(error,transactionHash){
                 if(error){
                     console.log(error)
                 }else{
                     console.log(transactionHash)
                     transactionHash1.innerHTML = transactionHash;
+					hashToSave.value = transactionHash;
                 }
             })
         };
@@ -152,6 +170,33 @@
         		}
         	});
         }
+		
+		//傳錢
+		function sendTransaction()
+		{
+			//紹哥的帳號
+//			var receiver = "0xbf64038974D1f84CC25067724B549AB70329b656";  
+//			var sender = web3.eth.accounts[0];
+//			web3.eth.sendTransaction({to:receiver,
+//                        from:sender, 
+//                       value:web3.toWei("0.01", "ether")}
+//                        ,function (err, res){});
+//			console.log(err, res);
+			web3.eth.sendTransaction({
+			from:account,	//如果from為空，預設取this.web3.eth.defaultAccount
+			to:'0x96B4250b8F769Ed413BFB1bb38c5d28C54f81618',
+			value:10000000000000000, //傳送的金額，這裡是0.01 ether
+			gas: 21000 //一個固定值，可選
+			}).on('transactionHash', function(hash){
+					console.log(hash);
+					document.getElementById('ethTransactionHash').innerHTML = hash;
+					document.getElementById('dataToSend').innerHTML = hash +" " + document.getElementById('dataToSend').innerHTML;	
+					setMsg();
+				})
+				
+			
+			
+		}
 
 </script>
 

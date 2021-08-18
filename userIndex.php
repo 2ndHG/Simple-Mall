@@ -48,5 +48,9 @@ p {text-align: center;}
 		
 		
 		<button type="button" onclick="location.href='merchantList.php'"><center>瀏覽攤商列表</button>
+		<br>
+		<br>
+		<button type="button" onclick="location.href='userRecord.php'"><center>查看交易紀錄</button>
 	</div>
 </body>
+</html>
