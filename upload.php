@@ -50,7 +50,7 @@
 			
 			if (!$result)
 			{
-				die('錯誤!Error: ' . mysqli_error($con));//如果sql執行失敗輸出錯誤
+				die('錯誤!!Error: ' . mysqli_error($con));//如果sql執行失敗輸出錯誤
 			}
 			else
 			{

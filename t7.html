@@ -1,0 +1,14 @@
+<script src="https://cdn.jsdelivr.net/npm/ipfs/dist/index.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const node = await Ipfs.create()
+  const results = await node.add('=^.^= good')
+  const cid = results//[0].hash
+  console.log('CID created via ipfs.add:', cid)
+  console.log('OK')
+  console.log(results.cid)
+  
+  const data = await node.cat(cid)
+  console.log('Data read back via ipfs.cat:', new TextDecoder().decode(data))
+})
+</script>

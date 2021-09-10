@@ -24,6 +24,14 @@
 	$sql = "SELECT id, name, img, intro, price, amount FROM stock WHERE address='$address'";
 
 	$result = mysqli_query($con, $sql);
+	if(!$result)
+	{
+		$haveStock = false;
+		echo "沒有商品";
+		die('錯誤!!Error: ' . mysqli_error($con));//如果sql執行失敗輸出錯誤
+	}
+	else
+		$haveStock = true;
 ?>
 <html>
 <head>
@@ -34,9 +42,11 @@
 	
 	<h2>我的商店</h2>
 	<button type="button" onclick="location.href='upload.html'"><center>上傳商品</button>
+	<button type="button" onclick="location.href='myShopSettings.php'"><center>設定</button>
+
 	<br><br>
 	<?php
-		while($row = $result->fetch_assoc())
+		while($haveStock && $row = $result->fetch_assoc())
 		{//左括號
 			$r = $g = $b = 180;//淡麗清新彩色的根基
 			$r += rand(0, 70); //加點隨機
@@ -55,7 +65,7 @@
 				echo "<h4>剩餘數量:</h4>";
 				echo "<p>".$row["amount"]."</p>";
 			?>
-			<form action="mySHop.php" target="_blank" method="post" >
+			<form action="myShop.php" target="_blank" method="post" >
 			<!--這裡藏了一個表單，可以用來傳遞商品id-->
 			<input hidden name="stock_id" value=<?php echo $row['id'];?>>
 			<input type="submit" name="delete_stock" style="width:100px" value="下架"/>

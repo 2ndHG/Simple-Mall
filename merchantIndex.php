@@ -28,19 +28,6 @@ p {text-align: center;}
 		<p>
 		 <?php 
 			$welcome = '你好! ';
-			/*$r = rand(0, 3);
-			switch($r)
-			{
-				case 1:
-				$welcome = '歡迎! ';
-				break;
-				case 2:
-				$welcome = '祝你有個美好的一天! ';
-				break;
-				case 3:
-				$welcome = 'WOW 你來了! ';
-				break;
-			}*/
 			echo $welcome.$_SESSION["address"]; ?>
 		</p>
 		
@@ -49,5 +36,7 @@ p {text-align: center;}
 		<button type="button" onclick="location.href='upload.html'"><center>上傳商品</button>
 		<br>
 		<button type="button" onclick="location.href='myShop.php'"><center>我的商店</button>
+		<br>
+		<button type="button" onclick="location.href='merchantOrder.php'"><center>訂單紀錄</button>
 	</div>
 </body>

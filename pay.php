@@ -54,31 +54,37 @@
 
 </head>
 <body>
-	<button id="btn" class="enableEthereumButton">連接</button>
-	<h2>Account: <span class="showAccount"></span></h2>
-	<input type="button" id="btn" onclick=getMsg() value="取值">
-	<input type="button" id="btn" onclick=setMsg() value="寫入">
-	<input type="button" id="btn" onclick=sendTransaction() value="送錢給紹哥">
-	
-	<h3>欲傳送的資料:</h3>
-	<p id="dataToSend"><?php echo $data?></p>
-	<!--h2><span class="getStaus"></span></h2--> 
-	<form name="form" id="form">
-		請輸入文字:
-		<input type="text" name="data" id="data">
-	</form>
-	
-    <h2>乙太幣的 Transaction Hash: <span id="ethTransactionHash"></span></h2>
-    <h2>訊息的 Transaction Hash: <span class="transactionHash1"></span></h2>
-	<br>
-	<br>
-	<h2>將hash寫入資料庫<h2/>
-	
-	<form name="form" id="form" action="saveTransactionHash.php" method="post">
-		<input type="text" id="hashToSave" name="hashToSave" value='000'>
-		<input type="submit" name='saveHash' onclick='' value='將hash寫入資料庫'>
-	</form>
+	<div class="w3-container" style="text-align:center">
+		<button id="btn" class="enableEthereumButton">連接</button>
+		<h2>Account: <span class="showAccount"></span></h2>
+		<input type="button" id="btn" onclick=getMsg() value="取值">
+		<input type="button" id="btn" onclick=setMsg() value="寫入">
+		<input type="button" id="btn" onclick=sendTransaction() value="送錢給紹哥">
 		
+		<h3>欲傳送的資料:</h3>
+		<p id="dataToSend"><?php echo $data?></p>
+		<!--h2><span class="getStaus"></span></h2--> 
+		<form name="form" id="form">
+			請輸入文字:
+			<input type="text" name="data" id="data">
+		</form>
+		
+		<h2>乙太幣的 Transaction Hash: <span id="ethTransactionHash"></span></h2>
+		<h2>訊息的 Transaction Hash: <span class="transactionHash1"></span></h2>
+		<br>
+		<br>
+		<h2>將hash寫入資料庫<h2/>
+		<div style="background-color:#FBF396">
+			<form name="form" id="form" action="saveTransactionHash.php" method="post" >
+				<p>交易對象:</p>
+				<input type="text" name="m_address" value='<?php echo $row2['address'] ?>'>
+				<p>交易Hash值:</p>
+				<input type="text" id="hashToSave" name="hashToSave" value=''>
+				<br>
+				<input type="submit" name='saveHash' onclick='' value='將hash寫入資料庫'>
+			</form>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
 	

@@ -12,6 +12,11 @@
 	else
 		$hashToSave = $_POST["hashToSave"];
 	
+	if (!isset($_POST["m_address"]) )
+		die("先前沒有產生商家電子郵件地址");
+	else
+		$m_address = $_POST["m_address"];
+	
 	//連接資料庫
 	
 	include('userConnect.php');
@@ -29,7 +34,7 @@
 	$id =  $row["max_id"]+1;
 	
 	
-	$q="insert into record(id, address, transaction_hash) values ('$id', '$address', '$hashToSave')";//向資料庫插入表單傳來的值的sql
+	$q="insert into record(id, address, m_address, transaction_hash) values ('$id', '$address', '$m_address', '$hashToSave')";//向資料庫插入表單傳來的值的sql
 	$reslut=mysqli_query($con,$q);//執行sql
 	if (!$result)
 	{

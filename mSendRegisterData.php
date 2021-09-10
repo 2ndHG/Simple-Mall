@@ -11,20 +11,32 @@
 	{
 		exit("錯誤執行");
 	}	
+	
+	include('userConnect.php');
+	mysqli_select_db($con,'test');
+	mysqli_set_charset($con,'utf8');
+	//讀取現有商人id最大值
+	$sql = "SELECT MAX(id) AS max_id FROM merchant";
+	$result = mysqli_query($con, $sql);
+	if (!$result)
+	{
+		die('錯誤!Error: ' . mysqli_error($con));//如果sql執行失敗輸出錯誤
+	}
+	//將編號+1當作此商品ID
+	$row = $result->fetch_assoc();
+	$id =  $row["max_id"]+1;
+	
+	
 	$name = $_POST["name"];
 	$password = $_POST["password"];
 	$tel = $_POST["tel"];
 	$birthday = $_POST["birthday"];
 	$address = $_POST["address"];
 	$publicKey = $_POST["publicKey"];
-	/*
-	if(($name != "" && $password != "" && $tel != "" && $birthday != "" && $email != "" 
-	    && $address != ""))
-		echo "好耶好耶太好了";*/
-	include('userConnect.php');
-	mysqli_select_db($con,'test');
-	mysqli_set_charset($con,'utf8');
-	$q="insert into merchant(m_address,m_password,m_name,m_tel,m_birthday,m_public_key) values ('$address','$password','$name','$tel','$birthday','$publicKey')";//向資料庫插入表單傳來的值的sql
+	
+	
+	
+	$q="insert into merchant(id, m_address,m_password,m_name,m_tel,m_birthday,m_public_key) values ('$id','$address','$password','$name','$tel','$birthday','$publicKey')";//向資料庫插入表單傳來的值的sql
 	$reslut=mysqli_query($con,$q);//執行sql
 	echo $address;
 	echo $password;

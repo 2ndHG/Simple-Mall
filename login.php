@@ -40,7 +40,7 @@ if ($address != "" && $password != "") {
    if(!$isMerchant)
    {
 	   $link = mysqli_connect("localhost","root",
-							  "root","test")
+							  "","test")
 			or die("無法開啟MySQL資料庫連接!<br/>");
 	   //送出UTF8編碼的MySQL指令
 	   mysqli_query($link, 'SET NAMES utf8'); 
@@ -53,7 +53,7 @@ if ($address != "" && $password != "") {
    else
    {
 	   $link = mysqli_connect("localhost","root",
-							  "root","test")
+							  "","test")
 			or die("無法開啟MySQL資料庫連接!<br/>");
 	   //送出UTF8編碼的MySQL指令
 	   mysqli_query($link, 'SET NAMES utf8'); 
@@ -124,7 +124,10 @@ if ($address != "" && $password != "") {
 <div align="center" style="background-color:#985142;padding:10px;margin-bottom:5px;">
 <img id="fried" src="">
 <br>
-<button onclick="chicken()">點我吃炸雞</button>
+<form action='http://localhost:3100/' target="_blank">
+<input type="submit" name="submit" >前往IPFS</input>
+</form>
+<!--button onclick="chicken()">點我吃炸雞</button-->
 </div>
 <script>
 function chicken()
