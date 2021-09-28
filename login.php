@@ -125,11 +125,39 @@ if ($address != "" && $password != "") {
 <img id="fried" src="">
 <br>
 <form action='http://localhost:3100/' target="_blank">
-<input type="submit" name="submit" >前往IPFS</input>
+<input type="submit" name="submit" >前往IPFS(表單)</input>
 </form>
+<button onclick="GoToIPFSPage()">前往IPFS(按鈕)</button>
+
+
 <!--button onclick="chicken()">點我吃炸雞</button-->
 </div>
 <script>
+function GoToIPFSPage()
+{
+	// cookie, 最好別用
+	// var ipfsHash = "This is not a hash1.";
+	// var params = new URLSearchParams();
+	// params.append("ipfsHash", ipfsHash);
+	// document.cookie = "pass=" + params.toString();
+	
+	
+	//開啟心分頁直接設值, 不好
+	var ipfsHash = "This is not a hash2.";
+	var newwin = window.open('http://localhost:3100/');
+	newwin.onload = function(){
+		// "this" refers to newwin
+		this.ipfsHash = ipfsHash;
+	};
+	
+	//var ipfsHash = "This is a hash3 .";
+	//sessionStorage.setItem("ipfsHash", ipfsHash);
+	
+	//location.href = './t8.html';
+	//location.href = 'http://localhost:3100/';
+	
+}
+
 function chicken()
 {
 	document.getElementById('fried').src='img/一口炸雞一口可樂.png';

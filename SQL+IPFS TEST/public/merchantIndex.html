@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+
+<style>
+p {text-align: center;}
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+<meta charset="utf-8" />
+<title>merchantIndex.html</title>
+</head>
+
+<body>
+	
+	<div align="center" style="background-color:#96EE7E;padding:10px;margin-bottom:5px;">
+		<p id="welcome">你好! </p>
+		<script>
+			if(sessionStorage.getItem('isMerchant') != 'true')
+				document.getElementById('welcome').innerHTML = "沒有使用攤商帳號登入";
+			else
+				document.getElementById('welcome').innerHTML += sessionStorage.getItem('address');
+		</script>
+		
+		
+		<button type="button" onclick="location.href='/upload'"><center>上傳商品</button>
+		<br>
+		<button type="button" onclick="location.href='/myShop/:okok'"><center>我的商店</button>
+		<br>
+		<button type="button" onclick="location.href='/merchantIndex/merchantOrder'"><center>訂單紀錄</button>
+	</div>
+</body>

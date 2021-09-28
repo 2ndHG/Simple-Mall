@@ -59,6 +59,9 @@ app.post('/profile', upload.single('avatar'), function (req, res, next) {
     
 
 })
+app.post('/profile2', function (req, res, next) {
+    res.send("不好");
 
+})
 
 app.listen(3100);

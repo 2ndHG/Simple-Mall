@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	p {text-align: center;}
+	.button {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	}
+</style>
+<meta charset="utf-8" />
+<title>login.html</title>
+</head>
+<script>
+	var testData = sessionStorage.getItem("testData");
+	if(testData != undefined)
+		console.log(testData);
+	else
+		console.log("沒有");
+	var testData = "test01";
+	sessionStorage.setItem("testData", testData);
+</script>
+
+<body>
+	<form action="/login" id="form" method="post" >
+	<div align="center" style="background-color:#82FF82;padding:10px;margin-bottom:5px;">
+		<br>
+		<label for="address">電子郵件:</label>
+		<input type="text" name="address" id="address" required autofocus/>
+		<br>  
+		<br> 
+		<label for="password">密碼:</label>
+		<input type="password" name="password" id="password" required/>
+		<br>
+		<br>
+		<input type="checkbox" id="isMerchant" name="isMerchant" value=true>
+		<label for="isMerchant"> 我是攤商</label>
+		<br>
+		<br>
+		<button onclick="SubmitLogin()">登入</button>
+		<p id="warning" hidden>帳號或密碼錯誤!</p>
+	</div>
+	
+	</form>
+	<br>
+	<div align="center" style="background-color:#77E9FF;padding:10px;margin-bottom:5px;">
+		
+		<p> 沒有帳號嗎?請註冊</p>
+		<br>
+		<button type="button" onclick="location.href='register.html'"><center>註冊</button>
+	</div>
+	<div align="center" style="background-color:#75845b;padding:10px;margin-bottom:5px;">
+		
+		<p>商家註冊</p>
+		<br>
+		<button type="button" onclick="location.href='mRegister.html'"><center>註冊</button>
+	</div>
+
+	<!-- 好吃的炸雞腿又來了-->
+	<div align="center" style="background-color:#985142;padding:10px;margin-bottom:5px;">
+	<img id="fried" src="">
+	<br>
+	<form action='http://localhost:3100/' target="_blank">
+	<input type="submit" name="submit" >前往IPFS(表單)</input>
+	</form>
+	<button onclick="GoToIPFSPage()">前往IPFS(按鈕)</button>
+	<!--button onclick="chicken()">點我吃炸雞</button-->
+	</div>
+
+	<script>
+		function SubmitLogin()
+		{
+			//console.log("e04");
+			var address = document.getElementById('address').value;
+            sessionStorage.setItem('address', address);
+			form = document.getElementById("form");
+			//如果密碼錯誤就會出現文字
+			sessionStorage.setItem('warning', true);
+			sessionStorage.setItem('isMerchant', document.getElementById('isMerchant').checked)
+			form.submit();
+			
+			
+			//document.getElementById('warning').hidden = false;
+		}
+
+	function GoToIPFSPage()
+	{
+		// cookie, 最好別用
+		// var ipfsHash = "This is not a hash1.";
+		// var params = new URLSearchParams();
+		// params.append("ipfsHash", ipfsHash);
+		// document.cookie = "pass=" + params.toString();
+		
+		
+		//開啟心分頁直接設值, 不好
+		var ipfsHash = "This is not a hash2.";
+		var newwin = window.open('http://localhost:3100/');
+		newwin.onload = function(){
+			// "this" refers to newwin
+			this.ipfsHash = ipfsHash;
+		};
+		
+		//var ipfsHash = "This is a hash3 .";
+		//sessionStorage.setItem("ipfsHash", ipfsHash);
+		
+		//location.href = './t8.html';
+		//location.href = 'http://localhost:3100/';
+		
+	}
+
+	function chicken()
+	{
+		document.getElementById('fried').src='img/一口炸雞一口可樂.png';
+	}
+	if(sessionStorage.getItem('warning') == 'true')
+	{
+		document.getElementById('warning').hidden = false;
+		sessionStorage.removeItem('warning');
+	}
+
+	</script>
+</body>
+</html>

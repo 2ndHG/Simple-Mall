@@ -23,10 +23,21 @@
 	// 如果點選傳送設定，更新資料
 	if ( isset($_POST["submitSetting"]) )
 	{
-		$deliveryBySelf = $_POST['deliveryBySelf'];
-		echo $_POST['deliveryBySelf'];
-		$deliveryByOther = $_POST['deliveryByOther'];
-		echo $_POST['deliveryByOther'];
+		echo "當前設定";
+		if(isset($_POST['deliveryBySelf']))
+		{
+			$deliveryBySelf = true;
+			echo "自送: ".$_POST['deliveryBySelf'];
+		}
+		else
+			$deliveryBySelf = false;
+		if(isset($_POST['deliveryByOther']))
+		{
+			$deliveryByOther = true;
+			echo "他送: ".$_POST['deliveryByOther'];
+		}
+		else
+			$deliveryByOther = false;
 		
 		$updateSql = "UPDATE shop_settings SET self_delivery = '$deliveryBySelf',  other_delivery = '$deliveryByOther' WHERE merchant_id='$id'";
 		
@@ -65,7 +76,7 @@
 ?>
 <html>
 <head>
-	<title>mySetting.php</title>
+	<title>myShopSetting.php</title>
 </head>
 <body>
 	<div class="w3-container" style="text-align:center">
@@ -74,10 +85,10 @@
 		<form action="myShopSettings.php" method="post" >
 			<div style="background-color:#82FF82">
 			<h3>送貨方式:</h3>
-			<input type="checkbox" id="deliveryBySelf" name="deliveryBySelf" value=<?php echo $row['self_delivery']? 'yes': 'no' ?>>
+			<input type="checkbox" id="deliveryBySelf" name="deliveryBySelf" value="yes"<?php echo $row['self_delivery']? ' checked' : '' ?>>
 			<label for="deliveryBySelf">老闆親送</label>
 			<br>
-			<input type="checkbox" id="deliveryByOther" name="deliveryByOther" value=<?php echo $row['other_delivery']? 'yes': 'no' ?>>
+			<input type="checkbox" id="deliveryByOther" name="deliveryByOther" value="yes" <?php echo $row['other_delivery']?' checked' : ''   ?>>
 			<label for="deliveryByOther">外送</label>
 			<br>
 			<input type="submit" name="submitSetting" style="width:100px" value="傳送設定"/>

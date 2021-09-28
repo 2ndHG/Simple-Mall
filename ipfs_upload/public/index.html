@@ -6,10 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index.html</title>
 </head>
+<script>
+    //取得cookie
+    //var passvars = document.cookie.split("; ").find(row => row.startsWith("pass")).substring(5);
+    //取回變數
+    //var params = new URLSearchParams(passvars);
+    //var ipfsHash = params.get("ipfsHash");
+    function LogIPFSHash()
+    {
+        var ipfsHash = sessionStorage.getItem("ipfsHash");
+        console.log(ipfsHash);
+    }
+    
+</script>
 <body>
+    <button onclick="LogIPFSHash()">logIPFS</button>
+    <br>
     <form action="/profile" method="post" enctype="multipart/form-data">
         <input type="file" name="avatar" />
         <button>upload</button>
       </form>
+      <br>
+    <form action="/profile2" method="post">
+        <button>profile2</button>
+    </form>
 </body>
 </html>

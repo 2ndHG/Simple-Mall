@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+
+<?php 
+	session_start();
+	
+	if(!$_SESSION["isMerchant"])
+		die("...你不是商家");
+	$address = $_SESSION["address"];
+	
+	//連接資料庫
+	include('userConnect.php');
+	mysqli_select_db($con,'test');
+	mysqli_set_charset($con,'utf8');
+	// 如果點選刪除購物車
+	if ( isset($_POST["delete_stock"]) )
+	{
+		$id = $_POST["stock_id"];
+		$sql = "DELETE FROM stock WHERE id='$id'";
+		$delete_result = mysqli_query($con, $sql);
+		if(!$delete_result)
+			echo "刪除失敗";
+	}
+	
+	
+	$sql = "SELECT id, name, img, intro, price, amount FROM stock WHERE address='$address'";
+
+	$result = mysqli_query($con, $sql);
+	if(!$result)
+	{
+		$haveStock = false;
+		echo "沒有商品";
+		die('錯誤!!Error: ' . mysqli_error($con));//如果sql執行失敗輸出錯誤
+	}
+	else
+		$haveStock = true;
+?>
+<html>
+<head>
+	<title>myShop.php</title>
+</head>
+<body>
+	<div class="w3-container" style="text-align:center">
+	
+	<h2>我的商店</h2>
+	<button type="button" onclick="location.href='upload.html'"><center>上傳商品</button>
+	<button type="button" onclick="location.href='myShopSettings.php'"><center>設定</button>
+
+	<br><br>
+		<div style="background-color:#64d9f6;padding:10px;margin-bottom:5px;">
+				<h2>".$row["name"]."</h2>"; 
+				<img src="data:image/jpeg;base64,'.base64_encode( $row['img'] ).'"/>';
+				<h4>描述:</h4>
+				<p>".$row["intro"]</p> 
+				<h4>價格:</h4>
+				<p>".$row["price"]</p>
+				<h4>剩餘數量:</h4>
+				<p>$row["amount"]</p>
+			<form action="myShop.php" target="_blank" method="post" >
+			<!--這裡藏了一個表單，可以用來傳遞商品id-->
+			<input hidden name="stock_id" value="">
+			<input type="submit" name="delete_stock" style="width:100px" value="下架"/>
+			</form>
+			<br>
+		</div>
+	</div>
+	<button onclick="displayList()">SHOW</button>
+</body>
+<script>
+	function displayList()
+	{
+		let dataName = [];
+		let request = async () => {
+			const response = await fetch('http://localhost:3100/myShop');
+			const data = await response.json();
+			dataName = data.name;
+		}
+		console.log(dataName);
+		//let name = document.getElementById('name');
+		//name.textContent = dataName;
+	} 
+</script>
+<?php 	mysqli_close($con);//關閉資料庫 ?>
+</html>
